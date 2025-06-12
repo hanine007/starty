@@ -1,0 +1,13 @@
+import mongoose from "mongoose";
+const ScpiSchema = new mongoose.Schema({
+  nom: { type: String, required: true },
+  rendement: Number,
+  societeId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Societe',
+    required: true
+  }
+});
+
+const Scpi = mongoose.model('Scpi', ScpiSchema);
+export default Scpi;
