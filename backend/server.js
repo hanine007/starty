@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import scpisRoutes from './routes/scpis.js';
 import societesRoutes from './routes/societes.js';
+import adminRoutes from './routes/admin.js';
+import userRoutes from './routes/user.js';
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
@@ -19,6 +21,8 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/scpis', scpisRoutes);
 app.use('/api/societes', societesRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/user', userRoutes);
 
 
 mongoose.connect(process.env.MONGODB_URI)
