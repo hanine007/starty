@@ -1,5 +1,6 @@
 import express from 'express';
 import Scpi from '../models/scpi.js';
+import verifyAdmin from '../middleware/verifyAdmin.js';
 const router = express.Router();
 // get touts les scpi
 router.get('/',async(req,res)=>{
@@ -12,7 +13,7 @@ router.get('/',async(req,res)=>{
     }
 })
 // creation une scpi 
-router.post ('/',async(req,res)=>{
+router.post ('/',verifyAdmin,async(req,res)=>{
     try{
         const nouvelleScpi = new Scpi(req.body);
         const savedScpi = await nouvelleScpi.save();
@@ -23,7 +24,7 @@ router.post ('/',async(req,res)=>{
     }
 })
 // modifier une scpi
-router.put('/:id',async(req,res)=>{
+router.put('/:id',verifyAdmin,async(req,res)=>{
     try{
         const updateScpi = await Scpi.findByIdAndUpdate(req.params.id,req.body, { new: true });
         res.json(updateScpi);
@@ -33,7 +34,7 @@ router.put('/:id',async(req,res)=>{
     }
 })
 // supprimer une scpi
-router.delete('/:id',async(req,res)=>{
+router.delete('/:id',verifyAdmin,async(req,res)=>{
     try{
         const deleteScpi = await Scpi.findByIdAndDelete(req.params.id);
         res.json({ message: "SCPI supprimee avec succes" });

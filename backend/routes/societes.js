@@ -1,6 +1,7 @@
 import express from "express";
 import Societe from "../models/societe.js";
 //import { check, validationResult } from "express-validator";
+import verifyAdmin from "../middleware/verifyAdmin.js";
 const router =express.Router();
 // tous les societes
 router.get('/',async(req,res)=>{
@@ -8,7 +9,7 @@ router.get('/',async(req,res)=>{
     res.json(societes);
 })
 //creation une societe
-router.post('/',async(req,res)=>{
+router.post('/',verifyAdmin,async(req,res)=>{
     const nouvelle = new Societe(req.body);
     try {
         const saved = await nouvelle.save();
@@ -19,7 +20,7 @@ router.post('/',async(req,res)=>{
 
 });
 //modifier une societe
-router.put('/:id',async(req,res)=>{
+router.put('/:id',verifyAdmin,async(req,res)=>{
     try {
         const updateSociete = await Societe.findByIdAndUpdate(req.params.id,req.body,{new: true})
         res.json(updateSociete);
@@ -28,7 +29,7 @@ router.put('/:id',async(req,res)=>{
     }
 });
 //supprimer une societe
-router.delete('/:id',async(req,res)=>{
+router.delete('/:id',verifyAdmin,async(req,res)=>{
     try{
         const deleteSociete= await Societe.findByIdAndDelete(req.params.id);
         res.json ({ message: "Societe supprimée avec succes"})
