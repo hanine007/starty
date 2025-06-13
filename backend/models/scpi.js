@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const ScpiSchema = new mongoose.Schema({
-  nom: { type: String, required: true },
+  name: { type: String, required: true },
   rendement: Number,
   societeId: {
     type: mongoose.Schema.Types.ObjectId,
