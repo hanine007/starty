@@ -48,7 +48,7 @@ router.post('/login', async(req, res) => {
         
         const token = jwt.sign(
             {id: user._id},
-            process.env.JWT_SECRET,  // Notez la majuscule dans SECRET
+            process.env.JWT_SECRETT,  // Notez la majuscule dans SECRET
             {expiresIn: '5d'}
         );
         
