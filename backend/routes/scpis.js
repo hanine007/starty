@@ -14,7 +14,7 @@ router.get('/',async(req,res)=>{
 // creation une scpi 
 router.post ('/',async(req,res)=>{
     try{
-const nouvelleScpi = new Scpi(req.body);
+        const nouvelleScpi = new Scpi(req.body);
         const savedScpi = await nouvelleScpi.save();
         res.status(201).json(savedScpi); 
     }
