@@ -1,56 +1,54 @@
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import api from '../services/api';
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import api from "../services/api";
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-const Login =()=>{
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
-    const handleLogin= async(e)=>{
-    e.preventDefault();
-    setError("");
-    try{
-        const response = await api.post("/admin/login",{email,password})
-        localStorage.setItem("token",response.data.token);
-        navigate("/admin/panel");
-    }catch{
-        setError("    Identifiant incorrrect");
+  const handleLogin = async () => {
+    try {
+      const response = await api.post('/admin/login', { email, password });
+      const token = response.data.token;
+      localStorage.setItem('adminToken', token);
+      navigate('/admin/panel');
+    } catch  {
+      alert('Erreur de connexion');
     }
-    };
+  };
 
+  return (
+    <div className="p-6 max-w-md mx-auto">
+      <h2 className="text-xl font-bold mb-4">Login Admin</h2>
 
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="w-full mb-2 p-2 border"
+      />
+      <input
+        type="password"
+        placeholder="Mot de passe"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="w-full mb-4 p-2 border"
+      />
 
+      <button onClick={handleLogin} className="bg-blue-600 text-white px-4 py-2 rounded w-full">
+        Connexion
+      </button>
 
-
-     return (
-    <div style={{ maxWidth: '400px', margin: '2rem auto' }}>
-      <h2>Connexion Admin</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Email :</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={{ width: '100%', marginBottom: '1rem' }}
-          />
-        </div>
-        <div>
-          <label>Mot de passe :</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{ width: '100%', marginBottom: '1rem' }}
-          />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Se connecter</button>
-      </form>
+      <div className="text-center mt-4">
+        <p>
+          Pas encore inscrit ?{' '}
+          <Link to="/admin/register" className="text-blue-600 underline">
+            S'inscrire
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };
