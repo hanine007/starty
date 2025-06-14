@@ -13,6 +13,7 @@ const RegisterAdmin = () => {
     try {
       await api.post('/admin/register', { email, password });
       setMsg("Admin créé !");
+      // vider les champs après l'inscription
       setEmail(''); setPassword('');
       
       // Redirection vers la page de login après 2 secondes
