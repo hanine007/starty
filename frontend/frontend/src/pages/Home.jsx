@@ -60,9 +60,17 @@ const Home = () => {
   };
   // nom de la societe par id
   const getSocieteNameById = (id) => {
-    const societe = societes.find((s) => s._id === id);
-    return societe ? societe.name : "Inconnu";
+    // Si une seule société existe, l'utiliser directement
+    if (societes.length === 1) return societes[0].name;
+
+    // Sinon essayer de trouver la correspondance
+    const societe = societes.find(
+      (s) =>
+        String(s._id) === (typeof id === "object" ? String(id._id) : String(id))
+    );
+    return societe ? societe.name : "Inconnue";
   };
+
   // remettre a 0 les filtres
   const resFiltres = () => {
     setSearchTerm("");
@@ -208,6 +216,64 @@ const Home = () => {
             Reinitialiser les filtres
           </button>
         </div>
+      </div>
+      {/* Affichage des scpis */}
+      <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "20px",
+          }}
+        >
+          <h3 style={{ margin: "0" }}>Résultats</h3>
+          <p style={{ margin: "0" }}>{filtredScpis.length} SCPI trouver</p>
+        </div>
+        {loading ? (
+          <p>Chargement des SCPI...</p>
+        ) : error ? (
+          <p style={{ color: "red" }}>{error}</p>
+        ) : filtredScpis.length === 0 ? (
+          <p>Aucune SCPI trouvée avec ces critères.</p>
+        ) : (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+              gap: "20px",
+            }}
+          >
+            {/* parcours des scpis filtrées */}
+            {filtredScpis.map((scpi) => (
+              <div
+                key={scpi._id}
+                style={{
+                  border: "1px solid #ddd",
+                  borderRadius: "8px",
+                  padding: "15px",
+                  backgroundColor: "white",
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
+                }}
+              >
+                <h4 style={{ margin: "0 0 10px 0" }}>{scpi.name}</h4>
+                <p style={{ margin: "5px 0" }}>
+                  <strong>Société:</strong> {getSocieteNameById(scpi.societeId)}
+                </p>
+                <p
+                  style={{
+                    margin: "5px 0",
+                    fontWeight: "bold",
+                    // Si le rendement est ≥ 5%, le texte est vert, sinon couleur normale
+                    color: scpi.rendement >= 5 ? "#28a745" : "inherit",
+                  }}
+                >
+                  <strong>Rendement:</strong> {scpi.rendement}%
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
