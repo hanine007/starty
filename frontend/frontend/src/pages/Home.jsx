@@ -34,6 +34,40 @@ const Home =()=>{
         };
         fetchData();
     }, []);
+    //  fct de filtrage des scpis
+    const getFilteredScpis = ()=>{
+        return scpis.filter(scpi=>{
+            // includes sert à vérifier si une chaîne de caractères est présente dans une autre
+            // par nom
+            const matchesSearch= scpi.name.toLowerCase().includes(searchTerm.toLowerCase());
+        // par societe 
+        const matchesSociete =  ! selectedSociete  || scpi.SocieteId===selectedSociete;
+       
+          // par rendement min 
+        const matchesRendementMin=!rendementMin || scpi.rendement >= rendementMin;    
+            // par rendement max
+        const matchesRendementMax= !rendementMax || scpi.rendement  <= rendementMax ;
+        return matchesSearch && matchesSociete && matchesRendementMin && matchesRendementMax;   
+
+    
+    
+        });
+
+    };
+    // nom de la societe par id
+    const getSocieteNameById= (id)=>{
+        const societe= societes.find(s=>s._id===id);
+        return societe ? societe.name : "Inconnu";
+    };
+    // remettre a 0 les filtres
+    const resFiltres = ()=> {
+        searchTerm('');
+        setRendementMax('');
+        setRendementMin('');
+        setSelectedSociete('');
+        
+    }
+    
 
     return (
         <div>
