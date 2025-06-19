@@ -65,7 +65,7 @@ const Home = () => {
   };
   // remettre a 0 les filtres
   const resFiltres = () => {
-    searchTerm("");
+    setSearchTerm("");
     setRendementMax("");
     setRendementMin("");
     setSelectedSociete("");
@@ -191,6 +191,22 @@ const Home = () => {
               }}
             />
           </div>
+        </div>
+        {/* le bouton reinitiliser */}
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <button
+            onClick={resFiltres}
+            style={{
+              padding: "8px 16px",
+              backgroundColor: "#6c757d", // Gris foncé
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer", // Change le curseur en main au survol
+            }}
+          >
+            Reinitialiser les filtres
+          </button>
         </div>
       </div>
     </div>
