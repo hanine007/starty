@@ -34,22 +34,32 @@ const Home = () => {
   }, []);
   //  fct de filtrage des scpis
   const getFilteredScpis = () => {
-    return scpis.filter((scpi) => {
-      // includes sert à vérifier si une chaîne de caractères est présente dans une autre
-      // par nom
-      const matchesSearch = scpi.name
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      // par societe
-      const matchesSociete =
-        !selectedSociete || scpi.SocieteId === selectedSociete;
+    const noFiltersApplied =
+      !searchTerm && !selectedSociete && !rendementMin && !rendementMax;
 
-      // par rendement min
+    if (noFiltersApplied) {
+      return scpis;
+    }
+
+    return scpis.filter((scpi) => {
+      const matchesSearch =
+        !searchTerm ||
+        scpi.name.toLowerCase().includes(searchTerm.toLowerCase());
+
+      // Filtre par société
+      const matchesSociete =
+        // selectedSociete est valeur de l'id de la societe 158 on affiche tous societe avec leur nom et valeur prend id de ces dernier
+        !selectedSociete ||
+        String(scpi.societeId) === selectedSociete ||
+        (typeof scpi.societeId === "object" &&
+          String(scpi.societeId._id) === selectedSociete);
+
       const matchesRendementMin =
-        !rendementMin || scpi.rendement >= rendementMin;
-      // par rendement max
+        !rendementMin || scpi.rendement >= parseFloat(rendementMin);
+
       const matchesRendementMax =
-        !rendementMax || scpi.rendement <= rendementMax;
+        !rendementMax || scpi.rendement <= parseFloat(rendementMax);
+
       return (
         matchesSearch &&
         matchesSociete &&
@@ -144,8 +154,8 @@ const Home = () => {
               }}
             >
               {/* option vide pour tout afficher */}
-              <option>Toutes les societes</option>
-              {/* listes tous les socites*/}
+              <option>Choisir une société</option>
+              {/* listes tous les socites selon l'id qui sera pris dans e.target.value  on preciser ici value a id*/}
               {societes.map((socite) => (
                 <option key={socite._id} value={socite._id}>
                   {socite.name}

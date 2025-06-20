@@ -10,14 +10,14 @@
 
 ### Pour les utilisateurs
 
-- Création et gestion de compte utilisateur  
-- Consultation des SCPI disponibles  
+- Création et gestion de compte utilisateur
+- Consultation des SCPI disponibles
 - Navigation intuitive avec interface responsive
 
 ### Pour les administrateurs
 
-- Interface d'administration sécurisée  
-- Gestion des SCPI (ajout, modification, suppression)  
+- Interface d'administration sécurisée
+- Gestion des SCPI (ajout, modification, suppression)
 - Gestion des sociétés partenaires
 
 ---
@@ -26,17 +26,17 @@
 
 ### Frontend
 
-- **React** : Bibliothèque JavaScript pour construire l'interface utilisateur  
-- **React Router** : Gestion du routage côté client  
-- **Axios** : Client HTTP pour communiquer avec l'API  
+- **React** : Bibliothèque JavaScript pour construire l'interface utilisateur
+- **React Router** : Gestion du routage côté client
+- **Axios** : Client HTTP pour communiquer avec l'API
 - **CSS-in-JS** : Style intégré dans les composants React
 
 ### Backend
 
-- **Node.js** : Environnement d'exécution JavaScript côté serveur  
-- **Express** : Framework web minimaliste pour Node.js  
-- **MongoDB** : Base de données NoSQL pour stocker les données  
-- **JWT** : Authentification par tokens pour sécuriser les routes  
+- **Node.js** : Environnement d'exécution JavaScript côté serveur
+- **Express** : Framework web minimaliste pour Node.js
+- **MongoDB** : Base de données NoSQL pour stocker les données
+- **JWT** : Authentification par tokens pour sécuriser les routes
 - **Bcrypt** : Hachage sécurisé des mots de passe
 
 ---
@@ -45,8 +45,8 @@
 
 ### Prérequis
 
-- Node.js (v16 ou supérieur)  
-- MongoDB  
+- Node.js (v16 ou supérieur)
+- MongoDB
 - npm ou yarn
 
 ### Étapes d'installation
@@ -60,7 +60,7 @@
 
 2. **Configuration du backend**
 
-   - Rendez-vous dans le dossier `/backend`  
+   - Rendez-vous dans le dossier `/backend`
    - Créez un fichier `.env` avec les variables suivantes :
 
      ```env
@@ -78,7 +78,7 @@
 
 3. **Configuration du frontend**
 
-   - Rendez-vous dans le dossier `/frontend`  
+   - Rendez-vous dans le dossier `/frontend`
    - Installez les dépendances :
 
      ```bash
@@ -138,35 +138,35 @@ portail-scpi/
 
 ### Utilisateurs
 
-- `POST /api/user/register` – Inscription utilisateur  
+- `POST /api/user/register` – Inscription utilisateur
 - `POST /api/user/login` – Connexion utilisateur
 
 ### Administrateurs
 
-- `POST /api/admin/register` – Inscription administrateur  
+- `POST /api/admin/register` – Inscription administrateur
 - `POST /api/admin/login` – Connexion administrateur
 
 ### SCPI
 
-- `GET /api/scpis` – Liste des SCPI  
-- `POST /api/scpis` – Ajouter une SCPI (admin seulement)  
-- `PUT /api/scpis/:id` – Modifier une SCPI (admin seulement)  
+- `GET /api/scpis` – Liste des SCPI
+- `POST /api/scpis` – Ajouter une SCPI (admin seulement)
+- `PUT /api/scpis/:id` – Modifier une SCPI (admin seulement)
 - `DELETE /api/scpis/:id` – Supprimer une SCPI (admin seulement)
 
 ### Sociétés
 
-- `GET /api/societes` – Liste des sociétés  
-- `POST /api/societes` – Ajouter une société (admin seulement)  
-- `PUT /api/societes/:id` – Modifier une société (admin seulement)  
+- `GET /api/societes` – Liste des sociétés
+- `POST /api/societes` – Ajouter une société (admin seulement)
+- `PUT /api/societes/:id` – Modifier une société (admin seulement)
 - `DELETE /api/societes/:id` – Supprimer une société (admin seulement)
 
 ---
 
 ## Sécurité
 
-- Authentification JWT pour sécuriser les routes  
-- Hachage des mots de passe avec bcrypt  
-- Validation des données utilisateur  
+- Authentification JWT pour sécuriser les routes
+- Hachage des mots de passe avec bcrypt
+- Validation des données utilisateur
 - Protection des routes sensibles via des middlewares d'authentification
 
 ---
