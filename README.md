@@ -1,3 +1,21 @@
+
+![Node.js](https://img.shields.io/badge/Node.js-18.0-green)
+![Express.js](https://img.shields.io/badge/Express.js-Framework-blue)
+![MongoDB](https://img.shields.io/badge/MongoDB-Database-brightgreen)
+![CORS](https://img.shields.io/badge/CORS-Security-yellow)
+![Morgan](https://img.shields.io/badge/Morgan-Logging-orange)
+![React](https://img.shields.io/badge/React-Frontend-blue)
+![bcrypt](https://img.shields.io/badge/bcrypt-Password%20Hashing-blueviolet)
+![JWT](https://img.shields.io/badge/JWT-Authentication-orange)
+![Axios](https://img.shields.io/badge/Axios-HTTP%20Client-lightgrey)
+
+
+
+
+
+
+
+
 # Portail SCPI - Plateforme de Gestion de Placements Immobiliers
 
 ## À propos du projet
